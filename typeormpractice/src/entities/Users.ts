@@ -38,7 +38,7 @@ export class Users{
         example: 23,
         description:'나이',
       })
-    @Column('number',{name:'age'})
+    @Column('int',{name:'age'})
     age:number;
 
     @CreateDateColumn()
