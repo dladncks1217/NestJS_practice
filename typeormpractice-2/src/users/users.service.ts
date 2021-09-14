@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm'; 
+import { InjectRepository } from '@nestjs/typeorm'; // entity에 query날리는건 repository임.
 import { Users } from 'src/entities/Users';
 
 @Injectable()
