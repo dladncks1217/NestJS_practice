@@ -23,6 +23,7 @@ import *as ormconfig from '../ormconfig';
     Users,
     Posts,
     TypeOrmModule.forRoot(ormconfig),
+    TypeOrmModule.forFeature([Users]), // 추가
   ],
   controllers: [
     AppController, 
