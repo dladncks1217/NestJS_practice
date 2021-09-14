@@ -1,24 +1,33 @@
-import { Column, 
-    CreateDateColumn, 
-    DeleteDateColumn, 
-    Entity, 
-    JoinColumn, 
-    ManyToOne, 
-    PrimaryGeneratedColumn, 
-    UpdateDateColumn 
-} from "typeorm";
+import { ApiProperty } from "@nestjs/swagger";
+import {
+    Column,
+    CreateDateColumn,
+    DeleteDateColumn,
+    Entity,
+    Index,
+    JoinColumn,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from 'typeorm';
 import { Users } from "./Users";
 
-
-
-@Entity({ schema: 'example1', name: 'posts' })
+@Entity({ schema: 'sleact', name: 'posts' })
 export class Posts{
     @PrimaryGeneratedColumn({type:'int',name:'id'})
     id:number;
 
+    @ApiProperty({
+        example:'아 배고프다',
+        description:'글 제목',
+      })
     @Column('varchar', {name:'title', length:30})
     title:string;  
 
+    @ApiProperty({
+        example:'먹을거 추천좀해주세요',
+        description:'글 제목',
+      })
     @Column('varchar', {name:'contents', length:100})
     contents:string;  
 

@@ -1,6 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Posts } from 'src/entities/Posts';
-import { Users } from 'src/entities/Users';
+import { Posts } from './src/entities/Posts';
+import { Users } from './src/entities/Users';
 import *as dotenv from 'dotenv';
 
 dotenv.config();
