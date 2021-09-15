@@ -11,8 +11,8 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
 
   const config = new DocumentBuilder()
-  .setTitle('Sleact API')
-  .setDescription('Sleact 개발을 위한 API 문서입니다.')
+  .setTitle('API')
+  .setDescription('API 문서입니다.')
   .setVersion('1.0')
   .addCookieAuth('connect.sid')
   .build();
