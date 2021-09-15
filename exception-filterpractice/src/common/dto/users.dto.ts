@@ -17,8 +17,8 @@ export class UsersDTO{
     public name : string;
 
     @ApiProperty({
-        example:'23',
-        description:'나이',
+        example:'asd67f476q54wearfytasdgfj',
+        description:'비밀번호',
         required:true,
     })
     public password : string;
