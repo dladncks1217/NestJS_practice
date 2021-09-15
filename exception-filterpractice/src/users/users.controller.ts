@@ -1,5 +1,5 @@
 import { Body, Controller, Post, UseInterceptors } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { undefinedToNullInterceptor } from 'src/interceptors/undefinedToNull.interceptor';
 import { UsersService } from './users.service';
 
@@ -9,6 +9,7 @@ import { UsersService } from './users.service';
 export class UsersController {
     constructor(private UsersService:UsersService){}
 
+    @ApiOperation({summary:'사용자 추가'})
     @ApiResponse({
         status:200,
         description:'성공',
