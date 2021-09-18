@@ -17,6 +17,8 @@ export class UsersController {
         return user.name;
     }
 
+
+    @ApiOperation({summary:'회원가입'})
     @Post('join')
     async Join(@Body() body){
         await this.UsersService.Join(body.email, body.name, body.age, body.password);
