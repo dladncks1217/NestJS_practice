@@ -8,7 +8,7 @@ import { Column,
 
 
 @Entity({ schema: 'example3', name: 'users' })
-export class Users{
+export class User{
     @PrimaryGeneratedColumn({type:'int',name:'id'})
     id:number;
 
