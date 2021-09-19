@@ -1,14 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import { ValidationPipe } from '@nestjs/common';
+import { HttpExceptionFilter } from 'httpException.filter';
 
 declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT || 3000;
+  app.useGlobalPipes(new ValidationPipe()); // httpException.filter.ts 통해 에러메시지 변경 가능
+  app.useGlobalFilters(new HttpExceptionFilter); // 모든 컨트롤러에서 발생하는 HttpException을 얘가 걸러줄거임.
 
   const config = new DocumentBuilder()
   .setTitle('passport 사용 예제 API')
@@ -31,6 +36,8 @@ async function bootstrap() {
     }),  
   );
 
+  app.use(passport.initialize()) // 얘네 넣어줘야 세션 제대로 동작함.
+  app.use(passport.session());
   await app.listen(port);
   console.log(`Listening on port ${port}`);
   

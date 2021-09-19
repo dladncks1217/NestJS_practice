@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import *as ormconfig from '../ormconfig';
 import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UsersService } from './users/users.service';
     }), 
     UsersModule,
     User,
+    AuthModule,
     TypeOrmModule.forRoot(ormconfig),
     TypeOrmModule.forFeature([User]), 
   ],
