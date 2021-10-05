@@ -6,13 +6,16 @@ import {
   Req,
   Res,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { Users } from '../common/decorator/users.decorator';
 import { LoggedInGuard } from '../auth/isLoggedIn.guard';
 import { localAuthGuard } from 'src/auth/local-auth.guard';
+import { UndefinedToNullInterceptor } from 'src/common/interceptors/undefinedToNull.interceptor';
 
+@UseInterceptors(UndefinedToNullInterceptor)
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
