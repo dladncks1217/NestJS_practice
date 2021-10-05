@@ -39,7 +39,7 @@ export class UsersController {
     logOut(@Req() req, @Res() res){
         req.logOut();
         res.clearCookie('connect.sid', {httpOnly:true});
-        res.send('OK');
+        res.send('로그아웃 완료');
     }
 
 }
