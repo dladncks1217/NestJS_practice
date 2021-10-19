@@ -1,5 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Redirect,
+  Render,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { localAuthGuard } from 'src/auth/local-auth.guard';
 import { Users } from 'src/common/decorator/user.decorator';
 import { UsersService } from './users.service';
 
@@ -14,7 +24,21 @@ export class UsersController {
     return user;
   }
 
+  @Get('authpage')
+  @Render('auth')
+  authpage(@Req() req) {
+    if (req.isAuthenticated()) {
+      let username = req.user.id;
+      console.log('asdf');
+      return username;
+    } else {
+      let username = '';
+      return username;
+    }
+  }
+
   @ApiOperation({ summary: '회원가입' })
+  @Redirect('authpage', 302)
   @Post('join')
   async Join(@Body() body) {
     await this.UsersService.Join(
@@ -25,9 +49,13 @@ export class UsersController {
     );
   }
 
+  @UseGuards(localAuthGuard)
   @ApiOperation({ summary: '로그인' })
   @Post('login')
-  LogIn() {}
+  @Redirect('authpage', 302)
+  LogIn(@Req() req) {
+    return req.user;
+  }
 
   @ApiOperation({ summary: '로그아웃' })
   @Post('logout')
