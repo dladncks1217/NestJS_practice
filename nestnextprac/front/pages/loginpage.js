@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import AppLayout from "../components/Applayout";
 import { Form, Input, Button, Checkbox } from "antd";
 
 const LoginPage = () => {
-  const onSubmit = (e) => {};
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [term, setTerm] = useState("");
+  const [termError, setTermError] = useState(false);
+
+  const onSubmit = (e) => {
+    if (!term) {
+      return setTermError(true);
+    }
+
+    console.log({
+      username,
+      password,
+      term,
+    });
+  };
+  const onChangeUserName = (e) => {
+    setUserName(e.target.value);
+  };
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+  const onChangeTerm = (e) => {
+    setTermError(false);
+    setTerm(e.target.checked);
+  };
   return (
     <>
       <Head>
@@ -27,24 +52,36 @@ const LoginPage = () => {
         >
           <Form.Item
             label="Username"
-            name="username"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
-            <Input />
+            <Input
+              value={username}
+              required
+              onChange={onChangeUserName}
+              name="username"
+            />
           </Form.Item>
 
           <Form.Item
             label="Password"
-            name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input.Password />
+            <Input.Password
+              name="password"
+              value={password}
+              required
+              onChange={onChangePassword}
+            />
             <Form.Item
-              name="remember"
               valuePropName="checked"
               wrapperCol={{ offset: 8, span: 16 }}
             >
-              <Checkbox>Remember me</Checkbox>
+              <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>
+                Remember me
+                {termError && (
+                  <div style={{ color: "red" }}>일단 체크 하세요.</div>
+                )}
+              </Checkbox>
             </Form.Item>
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
