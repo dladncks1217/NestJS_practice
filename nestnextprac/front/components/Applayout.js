@@ -1,13 +1,22 @@
 import React from "react";
 import Link from "next/link";
-import { Menu, Input, Button, Tooltip } from "antd";
+import { Menu, Input, Button, Tooltip, Row, Col } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import LoginForm from "./LoginForm";
+import ProfileCard from "./ProfileCard";
 
-const { SubMenu } = Menu;
+const dummy = {
+  username: "임우찬",
+  isLoggedIn: true,
+};
+
+function check() {
+  console.log(dummy.username);
+}
 
 const AppLayout = ({ children }) => {
   return (
-    <div>
+    <div onLoad={check}>
       <Menu mode="horizontal">
         <Menu.Item key="home">
           <Link href="/">
@@ -35,7 +44,26 @@ const AppLayout = ({ children }) => {
           />
         </Menu.Item>
       </Menu>
-      {children}
+      <Row>
+        <Col xs={24} md={6}>
+          {dummy.isLoggedIn ? (
+            <ProfileCard
+              username={dummy.username}
+              userfirstanme={dummy.username[0]}
+            />
+          ) : (
+            <LoginForm />
+          )}
+        </Col>
+        <Col xs={24} md={12}>
+          {children}
+        </Col>
+        <Col xs={24} md={6}>
+          <div style={{ marginLeft: 20 }}>
+            <h1>asdf</h1>
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 };

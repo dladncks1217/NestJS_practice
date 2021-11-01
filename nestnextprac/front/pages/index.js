@@ -2,17 +2,14 @@ import React from "react";
 import Link from "next/link";
 import Head from "next/head";
 import AppLayout from "../components/Applayout";
+import CalendarView from "../components/CalendarView";
 
-const Home = () => (
-  <AppLayout>
-    <Head>
-      <title>asdf</title>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.css"
-      />
-    </Head>
-  </AppLayout>
-);
+const onPanelChange = (value, mode) => {
+  console.log(value.format("YYYY-MM-DD"), mode);
+};
+
+const Home = () => {
+  return <CalendarView onPanelChange={onPanelChange} />;
+};
 
 export default Home;
