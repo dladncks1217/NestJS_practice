@@ -4,39 +4,20 @@ import { Menu, Input, Button, Tooltip, Row, Col } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import LoginForm from "./LoginForm";
 import ProfileCard from "./ProfileCard";
-
-const dummy = {
-  username: "임우찬",
-  isLoggedIn: true,
-};
-
-function check() {
-  console.log(dummy.username);
-}
+import { useSelector } from "react-redux";
+import isLoggedInBar from "./isLoggedInBar";
 
 const AppLayout = ({ children }) => {
+  const { isLoggedIn, username } = useSelector((state) => state.user);
   return (
-    <div onLoad={check}>
+    <div>
       <Menu mode="horizontal">
         <Menu.Item key="home">
           <Link href="/">
             <a>홈으로</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="joinpage">
-          <Link href="/joinpage">
-            <a>
-              <Button>회원가입</Button>
-            </a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="loginpage">
-          <Link href="/loginpage">
-            <a>
-              <Button>로그인</Button>
-            </a>
-          </Link>
-        </Menu.Item>
+        <isLoggedInBar loginstate={{ isLoggedIn }} />
         <Menu.Item key="search">
           <Input.Search
             placeholder="검색어를 입력하세요"
@@ -46,11 +27,8 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row>
         <Col xs={24} md={6}>
-          {dummy.isLoggedIn ? (
-            <ProfileCard
-              username={dummy.username}
-              userfirstanme={dummy.username[0]}
-            />
+          {isLoggedIn ? (
+            <ProfileCard username={username} userfirstanme={username[0]} />
           ) : (
             <LoginForm />
           )}

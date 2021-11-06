@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Head from "next/head";
 import { Form, Input, Button, Checkbox } from "antd";
+import { useDispatch } from "react-redux";
+import { loginAction } from "../reducers/uesr";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [term, setTerm] = useState("");
   const [termError, setTermError] = useState(false);
 
-  const onSubmit = (e) => {
-    if (!term) {
-      return setTermError(true);
-    }
+  const onSubmit = useCallback(() => {
+    dispatch(loginAction);
+  }, [username, password]);
 
-    console.log({
-      username,
-      password,
-      term,
-    });
-  };
   const onChangeUserName = (e) => {
     setUserName(e.target.value);
   };
