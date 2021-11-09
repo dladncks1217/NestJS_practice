@@ -21,7 +21,7 @@ export class User {
   @Column('int', { name: 'age' })
   age: number;
 
-  @Column('varchar', { name: 'password', unique: true, length: 30 })
+  @Column('varchar', { name: 'password', unique: true, length: 150 })
   password: string;
 
   @CreateDateColumn()

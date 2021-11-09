@@ -1,5 +1,15 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  ExecutionContext,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { LoggedInGuard } from 'src/auth/isLoggedIn.guard';
 import { localAuthGuard } from 'src/auth/local-auth.guard';
 import { Users } from 'src/common/decorator/users.decorator';
 import { UsersService } from './users.service';
@@ -13,8 +23,9 @@ export class UsersController {
     type: String,
   })
   @ApiOperation({ summary: '로그인 세션 유지 확인용' })
+  @UseGuards(LoggedInGuard)
   @Get('logincheck')
-  loginCheck(@Req() req) {}
+  loginCheck() {}
 
   @ApiResponse({
     type: Object,
@@ -37,10 +48,12 @@ export class UsersController {
     return user;
   }
 
-  @ApiResponse({
-    type: String,
-  })
+  @UseGuards(LoggedInGuard)
   @ApiOperation({ summary: '로그아웃' })
-  @Get('logout')
-  logout() {}
+  @Post('logout')
+  logOut(@Req() req, @Res() res) {
+    req.logOut();
+    res.clearCookie('connect.sid', { httpOnly: true });
+    res.send('로그아웃 완료');
+  }
 }

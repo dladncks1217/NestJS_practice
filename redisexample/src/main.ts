@@ -4,8 +4,9 @@ import { AppModule } from './app.module';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+
 import { ValidationPipe } from '@nestjs/common';
-// import { HttpExceptionFilter } from 'httpException.filter';
+import { HttpExceptionFilter } from 'httpException.filter';
 
 declare const module: any;
 
@@ -14,11 +15,11 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
 
   app.useGlobalPipes(new ValidationPipe()); // httpException.filter.ts 통해 에러메시지 변경 가능
-  // app.useGlobalFilters(new HttpExceptionFilter()); // 모든 컨트롤러에서 발생하는 HttpException을 얘가 걸러줄거임.
+  app.useGlobalFilters(new HttpExceptionFilter()); // 모든 컨트롤러에서 발생하는 HttpException을 얘가 걸러줄거임.
 
   const config = new DocumentBuilder()
-    .setTitle('passport 사용 예제 API')
-    .setDescription('passport사용 예제 API 문서입니다.')
+    .setTitle('redis session 사용 예제 API')
+    .setDescription('redis session 사용 예제 API 문서입니다.')
     .setVersion('1.0')
     .addCookieAuth('connect.sid')
     .build();
