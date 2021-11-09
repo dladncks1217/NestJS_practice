@@ -4,6 +4,8 @@ import { AppModule } from './app.module';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import * as RedisStore from 'connect-redis';
+import redis from 'redis';
 
 import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from 'httpException.filter';
@@ -13,6 +15,13 @@ declare const module: any;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT || 3000;
+
+  const client = redis.createClient({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD,
+    logErrors: true,
+  });
 
   app.useGlobalPipes(new ValidationPipe()); // httpException.filter.ts 통해 에러메시지 변경 가능
   app.useGlobalFilters(new HttpExceptionFilter()); // 모든 컨트롤러에서 발생하는 HttpException을 얘가 걸러줄거임.
@@ -35,6 +44,7 @@ async function bootstrap() {
       cookie: {
         httpOnly: true,
       },
+      store: new (RedisStore(session))({ client })(),
     }),
   );
 
