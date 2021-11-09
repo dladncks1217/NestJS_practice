@@ -1,5 +1,7 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { localAuthGuard } from 'src/auth/local-auth.guard';
+import { Users } from 'src/common/decorator/users.decorator';
 import { UsersService } from './users.service';
 
 @ApiTags('Users')
@@ -19,11 +21,21 @@ export class UsersController {
   })
   @ApiOperation({ summary: '회원가입' })
   @Post('join')
-  join(@Body() body) {}
+  async join(@Body() body) {
+    await this.UsersService.join(
+      body.email,
+      body.name,
+      body.age,
+      body.password,
+    );
+  }
 
+  @UseGuards(localAuthGuard)
   @ApiOperation({ summary: '로그인' })
   @Post('login')
-  login() {}
+  login(@Users() user) {
+    return user;
+  }
 
   @ApiResponse({
     type: String,

@@ -18,8 +18,8 @@ export class User {
   @Column('varchar', { name: 'name', unique: true, length: 30 })
   name: string;
 
-  @Column('varchar', { name: 'age', unique: true, length: 30 })
-  age: string;
+  @Column('int', { name: 'age' })
+  age: number;
 
   @Column('varchar', { name: 'password', unique: true, length: 30 })
   password: string;
