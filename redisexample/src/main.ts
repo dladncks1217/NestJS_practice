@@ -4,7 +4,10 @@ import { AppModule } from './app.module';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import * as RedisStore from 'connect-redis';
+import connectRedis from 'connect-redis';
+
+let RedisStore = connectRedis(session);
+
 import redis from 'redis';
 
 import { ValidationPipe } from '@nestjs/common';
@@ -43,8 +46,9 @@ async function bootstrap() {
       secret: process.env.COOKIE_SECRET,
       cookie: {
         httpOnly: true,
+        maxAge: 1000 * 60 * 60,
       },
-      store: new (RedisStore(session))({ client })(),
+      store: new RedisStore({ client }),
     }),
   );
 
