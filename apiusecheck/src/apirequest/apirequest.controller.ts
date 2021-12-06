@@ -17,8 +17,8 @@ export class ApirequestController {
     return this.ApirequestService.getUpdatedRank();
   }
 
-  @Get('/asdf')
-  example() {
-    return 'asdf';
+  @Get('/gameData/:nickname(*)')
+  getGameData(@Param('nickname') nickname: string) {
+    const puuid = this.ApirequestService.getMatchUpdate(nickname);
   }
 }
