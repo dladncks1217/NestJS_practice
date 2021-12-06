@@ -42,9 +42,14 @@ export class UsersController {
   }
 
   @UseGuards(localAuthGuard)
-  @ApiOperation({ summary: '로그인' })
+  @ApiOperation({
+    summary: '로그인',
+  })
   @Post('login')
-  login(@Users() user) {
+  login(
+    @Users()
+    user,
+  ) {
     return user;
   }
 

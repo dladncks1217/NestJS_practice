@@ -5,8 +5,8 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([User])], // repository가 userService에 인젝션.
+  imports: [TypeOrmModule.forFeature([User])], // repository가 userService에 인젝션.
   controllers: [UsersController],
-  providers: [UsersService]
+  providers: [UsersService],
 })
 export class UsersModule {}
