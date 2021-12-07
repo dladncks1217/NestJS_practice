@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ schema: 'TFT_Backend', name: 'tft_backend' })
+@Entity({ schema: 'TFT_Backend', name: 'Rank' })
 export class Rank {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
