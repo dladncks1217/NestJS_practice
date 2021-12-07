@@ -10,6 +10,8 @@ import { GamedataService } from './gamedata/gamedata.service';
 import { GamedataModule } from './gamedata/gamedata.module';
 import * as ormconfig from '../ormconfig';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { userMatchData } from './entities/userMatch.data';
+import { Rank } from './entities/Rank';
 
 @Module({
   imports: [
@@ -19,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     GamedataModule,
     TypeOrmModule.forRoot(ormconfig),
-    TypeOrmModule.forFeature([]),
+    TypeOrmModule.forFeature([userMatchData, Rank]),
   ],
   controllers: [AppController, ApirequestController, GamedataController],
   providers: [AppService, ApirequestService, GamedataService],
