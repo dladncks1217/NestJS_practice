@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="page-tit">로그인</h1>
+    <form class="login-form">
+      <label for="login-email" class="login-email-tit">이메일</label>
+      <input type="email" class="login-email-input" id="login-email" required />
+      <label for="login-pw" class="login-pw-tit">비밀번호</label>
+      <input type="password" class="login-pw-input" id="login-pw" required />
+      <p class="form-error-message">
+        *이메일 또는 비밀번호가 일치하지 않습니다.
+      </p>
+
+      <button class="large-login-btn" id="next-btn" disabled>로그인</button>
+      <script src="../public/js/login.js"></script>
+    </form>
+  </body>
+</html>

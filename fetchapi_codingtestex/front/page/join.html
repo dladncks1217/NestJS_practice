@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="page-tit">회원가입</h1>
+    <form class="join-form">
+      <label for="join-email" class="join-email-tit">이메일</label><br />
+      <input
+        type="email"
+        class="join-email-input"
+        id="join-email"
+        required
+      /><br />
+      <label for="join-name" class="join-name-tit">이름</label><br />
+      <input
+        type="name"
+        class="join-name-input"
+        id="join-name"
+        required
+      /><br />
+      <label for="join-pw" class="join-pw-tit">비밀번호</label><br />
+      <input
+        type="password"
+        class="join-pw-input"
+        id="join-pw"
+        required
+      /><br />
+      <label for="join-pw-check" class="join-pw-tit">비밀번호 확인</label><br />
+      <input
+        type="password"
+        class="join-pw-input-check"
+        id="join-pw-check"
+        required
+      /><br />
+      <strong class="form-error-message">
+        *이메일 또는 비밀번호가 일치하지 않습니다.
+      </strong>
+      <br />
+      <strong class="form-error-message2">*비밀번호가 다릅니다.</strong><br />
+      <button class="large-join-btn" id="next-btn" disabled>회원가입</button>
+      <script src="../public/js/join.js"></script>
+    </form>
+  </body>
+</html>
